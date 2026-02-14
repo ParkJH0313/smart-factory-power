@@ -2,51 +2,65 @@
 
 ---
 
-## Option 1: 전체 시스템 플로우
+## 🎯 추천: 심플 가로형 (README 메인용)
 
 ```mermaid
-graph TB
-    subgraph "Data Generation (5초 주기)"
-        A[Data Generator<br/>패턴 기반 생성<br/>13 모듈, 19 변수]
-    end
+graph LR
+    A["📊 데이터 생성<br/><b>5초 주기</b><br/>패턴 기반<br/>13 모듈"]
+    B[("🗄️ PostgreSQL<br/><b>4개 테이블</b><br/>실시간 저장")]
+    C["⚙️ ETL + 예측<br/><b>1시간 주기</b><br/>CatBoost<br/>MAE 0.93kW"]
+    D["📊 대시보드<br/><b>실시간</b><br/>Streamlit<br/>모니터링"]
     
-    subgraph "PostgreSQL Database"
-        B1[(sensor_data_raw<br/>5초 원본 데이터<br/>7일 보관)]
-        B2[(hourly_aggregated<br/>1시간 집계<br/>12개월 보관)]
-        B3[(features_for_model<br/>피처 테이블)]
-        B4[(predictions<br/>예측 결과)]
-    end
+    A -->|"INSERT"| B
+    B -->|"집계"| C
+    C -->|"예측"| B
+    B -.->|"조회"| D
     
-    subgraph "ETL Pipeline (1시간 주기)"
-        C1[Hourly Aggregation<br/>5초 → 1시간 집계]
-        C2[Feature Engineering<br/>Lag, Rolling 통계]
-        C3[CatBoost Model<br/>MAE: 0.93 kW<br/>RMSE: 2.23 kW]
-    end
+    style A fill:#fbbf24,stroke:#f59e0b,stroke-width:4px,color:#000
+    style B fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style C fill:#10b981,stroke:#059669,stroke-width:4px,color:#000
+    style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:4px,color:#fff
+```
+
+---
+
+## Option 1: 전체 시스템 플로우 (가로형 - 다크모드 최적화)
+
+```mermaid
+graph LR
+    A["📊 Data Generator<br/><b>패턴 기반 생성</b><br/>13 모듈, 19 변수<br/>(5초 주기)"]
     
-    subgraph "Visualization (실시간)"
-        D[Streamlit Dashboard<br/>실시간 모니터링<br/>예측 비교<br/>비용/탄소 분석]
-    end
+    B1[("🗄️ sensor_data_raw<br/><b>5초 원본</b><br/>7일 보관")]
+    B2[("📊 hourly_aggregated<br/><b>1시간 집계</b><br/>12개월 보관")]
+    B3[("🔧 features_for_model<br/><b>피처 테이블</b>")]
+    B4[("💾 predictions<br/><b>예측 결과</b>")]
     
-    A -->|INSERT| B1
-    B1 -->|집계| C1
+    C1["⚙️ Hourly Aggregation<br/><b>5초 → 1시간</b><br/>(1시간 주기)"]
+    C2["🔧 Feature Engineering<br/><b>Lag, Rolling 통계</b>"]
+    C3["🤖 CatBoost Model<br/><b>MAE: 0.93 kW</b><br/>RMSE: 2.23 kW"]
+    
+    D["📊 Streamlit Dashboard<br/><b>실시간 모니터링</b><br/>예측 vs 실제 비교<br/>비용/탄소 분석"]
+    
+    A -->|"INSERT"| B1
+    B1 -->|"집계"| C1
     C1 --> B2
-    B2 -->|피처 생성| C2
+    B2 -->|"피처 생성"| C2
     C2 --> B3
-    B3 -->|예측| C3
+    B3 -->|"예측"| C3
     C3 --> B4
-    B1 -.->|조회| D
-    B2 -.->|조회| D
-    B4 -.->|조회| D
+    B1 -.->|"조회"| D
+    B2 -.->|"조회"| D
+    B4 -.->|"조회"| D
     
-    style A fill:#fef3c7,stroke:#fbbf24,stroke-width:3px
-    style B1 fill:#dbeafe,stroke:#3b82f6,stroke-width:3px
-    style B2 fill:#dbeafe,stroke:#3b82f6,stroke-width:3px
-    style B3 fill:#dbeafe,stroke:#3b82f6,stroke-width:3px
-    style B4 fill:#dbeafe,stroke:#3b82f6,stroke-width:3px
-    style C1 fill:#d1fae5,stroke:#10b981,stroke-width:3px
-    style C2 fill:#d1fae5,stroke:#10b981,stroke-width:3px
-    style C3 fill:#fee2e2,stroke:#ef4444,stroke-width:3px
-    style D fill:#ede9fe,stroke:#8b5cf6,stroke-width:3px
+    style A fill:#fbbf24,stroke:#f59e0b,stroke-width:4px,color:#000
+    style B1 fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style B2 fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style B3 fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style B4 fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style C1 fill:#10b981,stroke:#059669,stroke-width:4px,color:#000
+    style C2 fill:#10b981,stroke:#059669,stroke-width:4px,color:#000
+    style C3 fill:#ef4444,stroke:#dc2626,stroke-width:4px,color:#fff
+    style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:4px,color:#fff
 ```
 
 ---
@@ -132,47 +146,51 @@ erDiagram
 
 ---
 
-## Option 4: 학습 vs 운영 분리
+## Option 4: 학습 vs 운영 분리 (가로형 - 다크모드 최적화)
 
 ```mermaid
-graph TB
-    subgraph "Model Training (Google Colab)"
-        T1[Historical Data<br/>CSV]
-        T2[Feature Engineering]
-        T3[CatBoost Training<br/>Optuna 최적화]
-        T4[model.pkl<br/>MAE: 0.93 kW]
+graph LR
+    subgraph Training["🎓 Model Training (Google Colab)"]
+        T1["📁 Historical Data<br/>CSV"]
+        T2["🔧 Feature<br/>Engineering"]
+        T3["🤖 CatBoost<br/>Training<br/>Optuna 최적화"]
+        T4["💾 model.pkl<br/><b>MAE: 0.93 kW</b>"]
     end
     
-    subgraph "Production (Local VSCode)"
-        P1[APScheduler]
-        P2[PostgreSQL<br/>실시간 데이터]
-        P3[model.pkl 로드]
-        P4[ETL Pipeline]
-        P5[Predictions]
-        P6[Streamlit<br/>Dashboard]
+    subgraph Production["🚀 Production (Local VSCode)"]
+        P1["⏰ APScheduler"]
+        P2[("🗄️ PostgreSQL<br/>실시간 데이터")]
+        P3["📦 model.pkl<br/>로드"]
+        P4["⚙️ ETL<br/>Pipeline"]
+        P5[("💾 Predictions")]
+        P6["📊 Streamlit<br/>Dashboard"]
     end
     
     T1 --> T2
     T2 --> T3
     T3 --> T4
-    T4 -.->|다운로드| P3
+    T4 -.->|"다운로드"| P3
     
-    P1 -->|5초| P2
-    P1 -->|1시간| P4
+    P1 -->|"5초"| P2
+    P1 -->|"1시간"| P4
     P2 --> P4
     P3 --> P4
     P4 --> P5
     P5 --> P2
     P2 --> P6
     
-    style T1 fill:#fef3c7,stroke:#fbbf24,stroke-width:2px
-    style T2 fill:#d1fae5,stroke:#10b981,stroke-width:2px
-    style T3 fill:#fee2e2,stroke:#ef4444,stroke-width:2px
-    style T4 fill:#fee2e2,stroke:#ef4444,stroke-width:3px
-    style P2 fill:#dbeafe,stroke:#3b82f6,stroke-width:3px
-    style P4 fill:#d1fae5,stroke:#10b981,stroke-width:2px
-    style P5 fill:#fee2e2,stroke:#ef4444,stroke-width:2px
-    style P6 fill:#ede9fe,stroke:#8b5cf6,stroke-width:2px
+    style T1 fill:#fbbf24,stroke:#f59e0b,stroke-width:3px,color:#000
+    style T2 fill:#10b981,stroke:#059669,stroke-width:3px,color:#000
+    style T3 fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style T4 fill:#ef4444,stroke:#dc2626,stroke-width:4px,color:#fff
+    style P1 fill:#fbbf24,stroke:#f59e0b,stroke-width:3px,color:#000
+    style P2 fill:#3b82f6,stroke:#1d4ed8,stroke-width:4px,color:#fff
+    style P3 fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+    style P4 fill:#10b981,stroke:#059669,stroke-width:3px,color:#000
+    style P5 fill:#3b82f6,stroke:#1d4ed8,stroke-width:3px,color:#fff
+    style P6 fill:#8b5cf6,stroke:#7c3aed,stroke-width:3px,color:#fff
+    style Training fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#fff
+    style Production fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#fff
 ```
 
 ---
