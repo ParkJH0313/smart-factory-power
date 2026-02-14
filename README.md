@@ -157,7 +157,7 @@ graph LR
         T4["💾 model.pkl<br/><b>MAE: 0.93 kW</b>"]
     end
     
-    subgraph Production["🚀 Production (Local VSCode)"]
+    subgraph Production[" Production "]
         P1["⏰ APScheduler"]
         P2[("🗄️ PostgreSQL<br/>실시간 데이터")]
         P3["📦 model.pkl<br/>로드"]
