@@ -150,7 +150,7 @@ erDiagram
 
 ```mermaid
 graph LR
-    subgraph Training["🎓 Model Training (Google Colab)"]
+    subgraph Training[" Model Training "]
         T1["📁 Historical Data<br/>CSV"]
         T2["🔧 Feature<br/>Engineering"]
         T3["🤖 CatBoost<br/>Training<br/>Optuna 최적화"]
