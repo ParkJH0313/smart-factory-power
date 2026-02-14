@@ -151,19 +151,19 @@ erDiagram
 ```mermaid
 graph LR
     subgraph Training[" Model Training "]
-        T1["📁 Historical Data<br/>CSV"]
-        T2["🔧 Feature<br/>Engineering"]
-        T3["🤖 CatBoost<br/>Training<br/>Optuna 최적화"]
-        T4["💾 model.pkl<br/><b>MAE: 0.93 kW</b>"]
+        T1[" Historical Data<br/>CSV"]
+        T2[" Feature<br/>Engineering"]
+        T3[" CatBoost<br/>Training<br/>Optuna 최적화"]
+        T4[" model.pkl<br/><b>MAE: 0.93 kW</b>"]
     end
     
     subgraph Production[" Production "]
-        P1["⏰ APScheduler"]
-        P2[("🗄️ PostgreSQL<br/>실시간 데이터")]
-        P3["📦 model.pkl<br/>로드"]
-        P4["⚙️ ETL<br/>Pipeline"]
-        P5[("💾 Predictions")]
-        P6["📊 Streamlit<br/>Dashboard"]
+        P1[" APScheduler"]
+        P2[(" PostgreSQL<br/>실시간 데이터")]
+        P3[" model.pkl<br/>로드"]
+        P4[" ETL<br/>Pipeline"]
+        P5[(" Predictions")]
+        P6[" Streamlit<br/>Dashboard"]
     end
     
     T1 --> T2
