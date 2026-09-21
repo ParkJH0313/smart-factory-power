@@ -1,0 +1,37 @@
+
+📌 Phase 1: 베이스라인
+   최고 베이스라인: Baseline 1: 전체 평균
+   MAE: 22.41 kW
+
+📌 Phase 2: Feature 선택
+   최적 조합: v3_+diff
+   Feature 개수: 9개
+   MAE: 3.88 kW
+   베이스라인 대비: 82.7% 개선
+
+📌 Phase 3: Bayesian Optimization
+   최적 CV MAE: 1.73 kW
+   시도 횟수: 100회
+   Default 대비: 39.47% 개선
+
+📌 Phase 4: 모델 비교
+   최종 선택: LightGBM
+   Test MAE: 2.79 kW
+
+📌 Phase 5: 최종 성능
+   Model: LightGBM
+   MAE: 3.11 kW
+   RMSE: 47.72 kW
+   SMAPE: 0.09%
+   누적 오차: 0.06%
+   베이스라인 대비: +86.1% 개선
+
+📁 저장된 파일:
+   - results/figures/feature_importance.png
+   - results/figures/optuna_history.png
+   - results/figures/optuna_importance.png
+   - results/figures/model_comparison.png
+   - results/figures/final_prediction.png
+   - results/figures/residual_analysis.png
+   - results/figures/hourly_error.png
+   - results/predictions/submission_sample.csv

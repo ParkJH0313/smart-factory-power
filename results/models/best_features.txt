@@ -1,0 +1,7 @@
+activePower_mean_diff_2h
+activePower_mean_lag_2h
+activePower_mean_diff_1h
+activePower_mean_lag_1h
+activePower_mean_rolling_max_6h
+activePower_mean_rolling_min_6h
+activePower_mean_rolling_mean_6h

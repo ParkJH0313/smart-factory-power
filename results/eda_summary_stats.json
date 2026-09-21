@@ -1,0 +1,11 @@
+{
+  "train_mean": 3010.2484891181325,
+  "test_mean": 3011.10550296349,
+  "overall_std": 26.73005681736213,
+  "mean_std": 716.6658954836805,
+  "mean_range": 3791.705549033149,
+  "hour_variation": 0.4,
+  "weekday_variation": 0.09,
+  "month_variation": 0.02,
+  "acf_lag1": -0.49
+}

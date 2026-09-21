@@ -1,0 +1,38 @@
+{
+  "model_name": "CatBoost",
+  "features": [
+    "activePower_mean_diff_2h",
+    "activePower_mean_lag_2h",
+    "activePower_mean_diff_1h",
+    "activePower_mean_lag_1h",
+    "activePower_mean_rolling_max_6h",
+    "activePower_mean_rolling_min_6h",
+    "activePower_mean_rolling_mean_6h"
+  ],
+  "n_features": 7,
+  "hyperparameters": {
+    "iterations": 982,
+    "learning_rate": 0.056332509897821806,
+    "depth": 5,
+    "l2_leaf_reg": 0.010029702543112239,
+    "border_count": 126,
+    "random_strength": 0.20821905280584085,
+    "bagging_temperature": 0.7249494888741492,
+    "random_seed": 42,
+    "verbose": false
+  },
+  "cv_mae": 1.3762772875162728,
+  "training_data": {
+    "start": "2024-12-01 08:00:00",
+    "end": "2025-04-30 06:00:00",
+    "n_samples": 3599
+  },
+  "prediction": {
+    "target_month": "2025-05",
+    "n_hours": 672,
+    "agg_pow_kwh": 2032940.4813821646,
+    "may_bill_krw": 365929286.64878964,
+    "may_carbon_kgco2": 861966.7641060378
+  },
+  "timestamp": "2026-02-08 15:36:54"
+}
